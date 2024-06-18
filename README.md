@@ -23,3 +23,7 @@ Bonus :
         Ajouter une gestion robuste des erreurs pour les entrées utilisateur incorrectes ou inattendues.
 - [x] Exportation vers un fichier :
         Offrir la possibilité d'exporter les mots de passe générés dans un fichier texte ou CSV pour une utilisation ultérieure. 
+
+main.py | generator.py | use.py | bdd | password.csv
+--- | --- | --- | --- | ---
+Fichier mère gérant tout les autres | Fichier de génération des mots de passe | Récupère le mot de passe d'une ligne (peut-être choisi entre `1` et `99` | C'est la *Base de donnée* pour le mot de passe de use.py | stocke tout les mot de passe générer
