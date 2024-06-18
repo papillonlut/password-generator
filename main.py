@@ -5,67 +5,102 @@ from rich.prompt import Prompt
 from rich.console import Console
 from rich.progress import Progress
 
-# Chaine de charactère
-chainNumber = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-chainChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-chainSpeChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "{", "}", "[", "]", "|", ":", ";", "'", ",", ".", "?", "/", "~", "`"]
+choice = Prompt.ask("Que voulez-vous faire ? ", choices=["generator", "gestion"]).strip()
 
-# Paramètre
-custom_theme = Theme({
-    "info": "blue",
-    "warning": "magenta",
-    "danger": "bold red"
-})
-console = Console(theme=custom_theme)
+if choice == "gestion":
+    readFile = open("bdd", "r")
+    password = readFile.read()
+    readFile.close()
 
-size = int(input("Choisissez le nombre de charactères compris entre 8 et 16 : "))
-repeat = int(input("Combien de mot de passe voulez-vous (1 à 99) : "))
+    userTyping = str(input("Entrer votre mot de passe : "))
 
-if size > 16:
-    console.print(f"[warning]Vous avez demandé un mot de passe de {size} caractères, malheureusement la taille souhaitée est trop grande.[/warning]")
-    exit()
-elif size < 8:
-    console.print(f"[warning]Vous avez demandé un mot de passe de {size} caractères, malheureusement la taille souhaitée est trop petite.[/warning]")
-    exit()
+    if userTyping == password:
+        change = Prompt.ask("Voulez-vous changer de mot de passe ?", choices=["yes", "no"]).strip()
+        if change == "yes":
+            userTypingChange = str(input("Veuilez entrer votre ancien mot de passe : "))
+            if userTypingChange == password:
+                newPassword = str(input("Entrer votre nouveau mot de passe : "))
 
-if repeat < 1 or repeat > 99:
-    console.print(f"[warning]Vous avez demandé {repeat} n'étant pas compris entre 1 et 99.[/warning]")
-    exit()
+                file = open("bdd", "w")
+                file.write(newPassword)
+                file.close()
+            else:
+                print("ERROR")
+        else:
+            question = int(input("Quel mot de passe voulez-vous (1 à 99) ? "))
+            
+            readFile = open("password.csv", "r")
+            lines = readFile.readlines()
+            print(lines[question])
+            readFile.close()
+    else:
+        print("ERROR")
 
-speChar = Prompt.ask("Voulez-vous des charactères spéciaux", choices=["yes", "no"]).strip()
+elif choice == "generator":
+    # Chaine de charactère
+    chainNumber = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    chainChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    chainSpeChar = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "{", "}", "[", "]", "|", ":", ";", "'", ",", ".", "?", "/", "~", "`"]
 
-if speChar == "yes":
-    loop = chainNumber + chainChar + chainSpeChar
-    speCharMessage = "avec"
-else:
-    loop = chainNumber + chainChar
-    speCharMessage = "sans"
+    # Paramètre
+    custom_theme = Theme({
+        "info": "blue",
+        "warning": "magenta"
+    })
+    console = Console(theme=custom_theme)
 
-console.print(f"Vous avez demandé {repeat} mot de passe de {size} caractères, {speCharMessage} caractères spéciaux.", style="info")
+    size = int(input("Choisissez le nombre de charactères compris entre 8 et 16 : "))
+    repeat = int(input("Combien de mot de passe voulez-vous (1 à 99) : "))
 
-with Progress() as progress:
+    if size < 8 or size > 16:
+        console.print(f"[warning]Vous avez demandé un mot de passe de {size} caractères, malheureusement la taille n'est pas compris entre 8 et 16.[/warning]")
+        exit()
 
-    task1 = progress.add_task("[yellow]Reflection...", total=500)
+    if repeat < 1 or repeat > 99:
+        console.print(f"[warning]Vous avez demandé {repeat} n'étant pas compris entre 1 et 99.[/warning]")
+        exit()
+    elif repeat > 1:
+        plur = "mots"
+    else:
+        plur = "mot"
 
-    while not progress.finished:
-        progress.update(task1, advance=1)
-        time.sleep(0.02)
+    speChar = Prompt.ask("Voulez-vous des charactères spéciaux", choices=["yes", "no"]).strip()
 
-with Progress() as progress2:
+    if speChar == "yes":
+        loop = chainNumber + chainChar + chainSpeChar
+        speCharMessage = "avec"
+    else:
+        loop = chainNumber + chainChar
+        speCharMessage = "sans"
 
-    task2 = progress2.add_task("[green]Creation...", total=100)
+    console.print(f"Vous avez demandé {repeat} {plur} de passe de {size} caractères, {speCharMessage} caractères spéciaux.", style="info")
 
-    while not progress2.finished:
-        progress2.update(task2, advance=1)
-        time.sleep(0.02)
+    with Progress() as progress:
 
-file = open("mdp-generator\password.csv", "w") 
-file.write("#;Mot de passe\n")
-i = 1
-for csvfile in range(repeat):
-    password = ''.join(random.choices(loop, k=size))
-    file.write(f"{i};\"{password}\"\n")
-    i += 1
-file.close()
+        task1 = progress.add_task("[yellow]Reflection...", total=500)
 
-console.print("Votre mot de passe est disponible dans le fichier password.csv", style="info")
+        while not progress.finished:
+            progress.update(task1, advance=1)
+            time.sleep(0.02)
+
+    with Progress() as progress2:
+
+        task2 = progress2.add_task("[green]Creation...", total=100)
+
+        while not progress2.finished:
+            progress2.update(task2, advance=1)
+            time.sleep(0.02)
+
+    file = open("mdp-generator\password.csv", "w") 
+    file.write("#;Mot de passe\n")
+    i = 1
+    for csvfile in range(repeat-1):
+        password = ''.join(random.choices(loop, k=size))
+        file.write(f"{i};\"{password}\"\n")
+        i += 1
+    file.write(f"{i};\"{password}\"")
+    file.close()
+
+    console.print("Votre mot de passe est disponible dans le fichier password.csv", style="info")
+    time.sleep(5)
+    console.clear()
