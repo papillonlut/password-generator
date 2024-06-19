@@ -22,4 +22,8 @@ Bonus :
 - [x] Gestion des erreurs :
         Ajouter une gestion robuste des erreurs pour les entrées utilisateur incorrectes ou inattendues.
 - [x] Exportation vers un fichier :
-        Offrir la possibilité d'exporter les mots de passe générés dans un fichier texte ou CSV pour une utilisation ultérieure. 
+        Offrir la possibilité d'exporter les mots de passe générés dans un fichier texte ou CSV pour une utilisation ultérieure.
+
+- [ ] Faire un autre programme pour demander une liste des services
+- [ ] Assigné aléatoirement un service à un username et à un password
+- [ ] Améliorer le gestionnaire qui permet d'afficher par service et non par ligne
