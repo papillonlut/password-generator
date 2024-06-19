@@ -25,5 +25,5 @@ Bonus :
         Offrir la possibilité d'exporter les mots de passe générés dans un fichier texte ou CSV pour une utilisation ultérieure.
 
 - [ ] Faire un autre programme pour demander une liste des services
-- [ ] Assigné aléatoirement un service à un username et à un password
+- [x] Assigné aléatoirement un password à un service et à un username
 - [x] Améliorer le gestionnaire qui permet d'afficher par service et non par ligne
