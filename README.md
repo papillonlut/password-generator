@@ -26,4 +26,4 @@ Bonus :
 
 - [ ] Faire un autre programme pour demander une liste des services
 - [ ] Assigné aléatoirement un service à un username et à un password
-- [ ] Améliorer le gestionnaire qui permet d'afficher par service et non par ligne
+- [x] Améliorer le gestionnaire qui permet d'afficher par service et non par ligne
