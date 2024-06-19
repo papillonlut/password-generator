@@ -1,0 +1,36 @@
+{
+    "data": {
+        "admin": {
+            "admin": "admin",
+            "bobby": "c)`w}`ux`1oxyc&1"
+        },
+        "apple": {
+            "Jane.Doe": "janedoe123",
+            "admin": "admin"
+        },
+        "amazon": {
+            "admin": "admin",
+            "jane": "doe"
+        },
+        "microsoft": {
+            "admin": "admin",
+            "jane": "doe"
+        },
+        "facebook": {
+            "admin": "admin",
+            "jane": "doe"
+        },
+        "instagram": {
+            "admin": "admin",
+            "jane": "doe"
+        },
+        "snapchat": {
+            "admin": "admin",
+            "jane": "doe"
+        },
+        "papillon": {
+            "admin": "admin",
+            "password": "admin"
+        }
+    }
+}
